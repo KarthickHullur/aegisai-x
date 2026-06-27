@@ -75,12 +75,20 @@ if err := os.WriteFile(envPath, []byte(defaultEnv), 0644); err == nil {
 } else {
 	log.Printf("[Self-Healing Error] Failed to generate backend .env file: %v", err)
 }
+} // <-- ADD THIS BRACE
 
-	// 3. Check for critical environment variables and log warnings if missing
-	requiredEnv := []string{"DB_HOST", "DB_PORT", "DB_NAME", "DB_USER", "DB_PASSWORD"}
-	for _, env := range requiredEnv {
-		if os.Getenv(env) == "" {
-			log.Printf("[Self-Healing Warning] Missing critical environment variable: %s", env)
-		}
+// 3. Check for critical environment variables
+requiredEnv := []string{
+	"DB_HOST",
+	"DB_PORT",
+	"DB_NAME",
+	"DB_USER",
+	"DB_PASSWORD",
+}
+
+for _, env := range requiredEnv {
+	if os.Getenv(env) == "" {
+		log.Printf("[Self-Healing Warning] Missing critical environment variable: %s", env)
 	}
+}
 }
