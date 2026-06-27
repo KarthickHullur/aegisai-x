@@ -67,12 +67,14 @@ DB_NAME=aegisai
 DB_USER=postgres
 DB_PASSWORD=postgres
 
-GEMINI_API_KEY=YOUR_GEMINI_API_KEY		if err := os.WriteFile(envPath, []byte(defaultEnv), 0644); err == nil {
-			log.Println("[Self-Healing] Generated default backend .env file")
-		} else {
-			log.Printf("[Self-Healing Error] Failed to generate backend .env file: %v", err)
-		}
-	}
+GEMINI_API_KEY=YOUR_GEMINI_API_KEY
+`
+
+if err := os.WriteFile(envPath, []byte(defaultEnv), 0644); err == nil {
+	log.Println("[Self-Healing] Generated default backend .env file")
+} else {
+	log.Printf("[Self-Healing Error] Failed to generate backend .env file: %v", err)
+}
 
 	// 3. Check for critical environment variables and log warnings if missing
 	requiredEnv := []string{"DB_HOST", "DB_PORT", "DB_NAME", "DB_USER", "DB_PASSWORD"}
