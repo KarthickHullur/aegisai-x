@@ -59,6 +59,29 @@ func RunMigrations(db *sql.DB) error {
 	}
 
 	// 3. Alter incidents table
+
+
+	log.Println("[Migrations] Creating incidents table...")
+
+queryIncidents := `
+CREATE TABLE IF NOT EXISTS incidents (
+    id SERIAL PRIMARY KEY,
+    incident_id TEXT,
+    title TEXT NOT NULL,
+    source TEXT DEFAULT 'system-monitor',
+    severity TEXT NOT NULL,
+    logs TEXT,
+    status TEXT DEFAULT 'Open',
+    occurrence_count INT DEFAULT 1,
+    first_seen TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    last_seen TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);`
+
+if _, err := db.Exec(queryIncidents); err != nil {
+    return fmt.Errorf("migration failed creating incidents table: %w", err)
+}
 	log.Println("[Migrations] Altering incidents table...")
 	alterIncidents := []string{
 		"ALTER TABLE incidents ADD COLUMN IF NOT EXISTS incident_id TEXT;",
@@ -114,6 +137,23 @@ func RunMigrations(db *sql.DB) error {
 	}
 
 	// 4. Alter investigations table
+	log.Println("[Migrations] Creating investigations table...")
+
+queryInvestigations := `
+CREATE TABLE IF NOT EXISTS investigations (
+    id SERIAL PRIMARY KEY,
+    incident_id INT REFERENCES incidents(id) ON DELETE CASCADE,
+    summary TEXT,
+    root_cause TEXT,
+    impact TEXT,
+    recommendations TEXT[],
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);`
+
+if _, err := db.Exec(queryInvestigations); err != nil {
+    return fmt.Errorf("migration failed creating investigations table: %w", err)
+}
 	log.Println("[Migrations] Altering investigations table...")
 	alterInvestigations := []string{
 		"ALTER TABLE investigations ADD COLUMN IF NOT EXISTS updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP;",
