@@ -1,0 +1,70 @@
+cd for change directory
+mkdir for making directory
+rmdir for removing directory
+rm -rf for removing for folder
+rm -rm file.txt
+pwd
+ls
+ls -la for 
+chmod
+chown
+
+apt for ubuntu
+yum for red hat Linux
+
+----------------------------------------------------
+
+shell 
+
+B-shell - Bash - default - /bin/bash
+K-shell - ksh
+C-shell - csh
+z-shell - zsh
+
+-------------
+shebang - mentioning your shell path(which shell you are using)
+
+#!/bin/bash - shebang
+--------------------------------------
+if/else statement:
+
+if [condition];then
+   echo "value is true"
+else
+   echo "value is false"
+fi
+
+
+-eq = equal
+-ne = Not equal
+-ge = Greater than or equal
+-gt = Greater than
+-lt = Lesser than
+-le = Lesser than or equal
+-f  = Finding
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
