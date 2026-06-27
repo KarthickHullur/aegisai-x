@@ -49,9 +49,10 @@ func LoadEnv(filePath string) error {
 // Load compiles config values and runs validation
 func Load() (*Config, error) {
 	port := os.Getenv("PORT")
-	if port == "" {
-		port = ":8082"
-	}
+if port == "" {
+    port = "8082"
+}
+port = ":" + strings.TrimPrefix(port, ":")
 
 	dbHost := os.Getenv("DB_HOST")
 	dbPort := os.Getenv("DB_PORT")
