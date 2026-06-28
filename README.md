@@ -218,10 +218,4 @@ You can explore the platform and connect it with your own cloud credentials to e
 
 ---
 
-## 👨‍💻 Author
 
-**Darshan B H**
-
-Computer Science Engineer | Full-Stack Developer | Cloud & DevOps Enthusiast
-
-Built with ❤️ while exploring Cloud Engineering, Observability, and AI-Assisted Operations.
